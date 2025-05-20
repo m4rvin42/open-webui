@@ -1,0 +1,12 @@
+name: Nightly Docker build (reuses upstream workflow)
+
+on:
+  schedule:
+    # ┌ min ┐ ┌ h ┐ ┌ day of month ┐ ┌ month ┐ ┌ day of week ┐
+    - cron:  '0 2 * * *'   # every day at 02:00 UTC ≈ 04:00 in Berlin
+  workflow_dispatch:        # lets you run it manually from the UI
+
+jobs:
+  call-build:
+    uses: ./.github/workflows/docker-build.yaml   # <- lives in your fork
+    secrets: inherit                              # pass all repo secrets through
